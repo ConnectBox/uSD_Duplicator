@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<!--[if IE 9]><html class="no-js ie ie9" lang="en-US"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="no-js no-ie" lang="en-US"><!--<![endif]-->
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+		<title>Making a Low-Cost microSD card Duplicator &#8211; ConnectBox</title>
+<meta name='robots' content='max-image-preview:large' />
+<meta property="og:site_name" content="ConnectBox" /><meta property="og:title" content="Making a Low-Cost microSD card Duplicator &#8211; ConnectBox" /><meta property="og:locale" content="en_US" /><meta property="og:url" content="https://connectbox.technology/wp/making-a-low-cost-microsd-card-duplicator/" /><meta property="og:description" content="One of the most time consuming and costly aspects of distributing ConnectBoxes is the time and effort to duplicate all the microSD card. Normally, you would use something like Etcher to create them one by one. An alternative is to buy a 7:1 dup [...]" /><meta property="og:image" content="https://raw.githubusercontent.com/ConnectBox/website_posts/master/sdcard_duplicator/duplicator_setup.jpg" /><link rel='dns-prefetch' href='//ajax.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="ConnectBox &raquo; Feed" href="https://connectbox.technology/wp/feed/" />
+<link rel="alternate" type="application/rss+xml" title="ConnectBox &raquo; Comments Feed" href="https://connectbox.technology/wp/comments/feed/" />
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/connectbox.technology\/wp\/wp-includes\/js\/wp-emoji-release.min.js?ver=6076790b709e614ff4162e8ca5523589"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!n(e,"\ud83d\udc26\u200d\u2b1b","\ud83d\udc26\u200b\u2b1b")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<link rel='stylesheet' id='layerslider-css' href='https://connectbox.technology/wp/wp-content/plugins/LayerSlider/assets/static/layerslider/css/layerslider.css?ver=7.11.0' type='text/css' media='all' />
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://connectbox.technology/wp/wp-includes/css/dist/block-library/style.min.css?ver=6076790b709e614ff4162e8ca5523589' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='everything-style-css' href='https://connectbox.technology/wp/wp-content/themes/everything/data/css/style.min.css?ver=4.12.1' type='text/css' media='all' />
+<link rel='stylesheet' id='everything-scheme-css' href='https://connectbox.technology/wp/wp-content/themes/everything/data/css/bright.min.css?ver=4.12.1' type='text/css' media='all' />
+<link rel='stylesheet' id='everything-mobile-css' href='https://connectbox.technology/wp/wp-content/themes/everything/data/css/mobile.min.css?ver=4.12.1' type='text/css' media='only screen and (max-width: 767px)' />
+<link rel='stylesheet' id='everything-stylesheet-css' href='https://connectbox.technology/wp/wp-content/themes/everything/style.css?ver=6076790b709e614ff4162e8ca5523589' type='text/css' media='all' />
+<link rel='stylesheet' id='ms-main-css' href='https://connectbox.technology/wp/wp-content/plugins/masterslider/public/assets/css/masterslider.main.css?ver=3.7.7' type='text/css' media='all' />
+<link rel='stylesheet' id='ms-custom-css' href='https://connectbox.technology/wp/wp-content/uploads/masterslider/custom.css?ver=12.2' type='text/css' media='all' />
+<script type="text/javascript" src="https://connectbox.technology/wp/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://connectbox.technology/wp/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script type="text/javascript" id="layerslider-utils-js-extra">
+/* <![CDATA[ */
+var LS_Meta = {"v":"7.11.0","fixGSAP":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://connectbox.technology/wp/wp-content/plugins/LayerSlider/assets/static/layerslider/js/layerslider.utils.js?ver=7.11.0" id="layerslider-utils-js"></script>
+<script type="text/javascript" src="https://connectbox.technology/wp/wp-content/plugins/LayerSlider/assets/static/layerslider/js/layerslider.kreaturamedia.jquery.js?ver=7.11.0" id="layerslider-js"></script>
+<script type="text/javascript" src="https://connectbox.technology/wp/wp-content/plugins/LayerSlider/assets/static/layerslider/js/layerslider.transitions.js?ver=7.11.0" id="layerslider-transitions-js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js?ver=1.4.7" id="everything-webfont-js"></script>
+<meta name="generator" content="Powered by LayerSlider 7.11.0 - Build Heros, Sliders, and Popups. Create Animations and Beautiful, Rich Web Content as Easy as Never Before on WordPress." />
+<!-- LayerSlider updates and docs at: https://layerslider.com -->
+<link rel="https://api.w.org/" href="https://connectbox.technology/wp/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://connectbox.technology/wp/wp-json/wp/v2/pages/155" /><link rel="canonical" href="https://connectbox.technology/wp/making-a-low-cost-microsd-card-duplicator/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://connectbox.technology/wp/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fconnectbox.technology%2Fwp%2Fmaking-a-low-cost-microsd-card-duplicator%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://connectbox.technology/wp/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fconnectbox.technology%2Fwp%2Fmaking-a-low-cost-microsd-card-duplicator%2F&#038;format=xml" />
+<script>var ms_grabbing_curosr='https://connectbox.technology/wp/wp-content/plugins/masterslider/public/assets/css/common/grabbing.cur',ms_grab_curosr='https://connectbox.technology/wp/wp-content/plugins/masterslider/public/assets/css/common/grab.cur';</script>
+<meta name="generator" content="MasterSlider 3.7.7 - Responsive Touch Image Slider" />
+<style>
+a,
+a.alt:hover,
+.alt a:hover,
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover,
+.color,
+.toggles > div > h3:hover > i,
+.nav-menu a:hover,
+.nav-menu .current > a, .nav-menu .current > a:hover,
+.mobile-nav-menu a:hover,
+.mobile-nav-menu .current > a, .mobile-nav-menu .current > a:hover,
+.aside-nav-menu a:hover,
+.aside-nav-menu .current:not(.current-menu-parent):not(.current-menu-ancestor) > a, .aside-nav-menu .current:not(.current-menu-parent):not(.current-menu-ancestor) > a:hover {
+color: #0a70a6;
+}
+mark,
+.background-color,
+.sy-pager li.sy-active a {
+background-color: #0a70a6;
+}
+.zoom-hover > .zoom-hover-overlay {
+background-color: rgba(10, 112, 166, 0.75);
+}
+blockquote.bar,
+.sticky:before {
+border-color: #0a70a6;
+}
+.layout-boxed .outer-container, .container {
+max-width: 1140px;
+}
+.mejs-container .mejs-controls .mejs-time-rail .mejs-time-current {
+background-color: #0a70a6;
+}
+</style>
+<script>
+if (typeof WebFont != 'undefined') {
+WebFont.load({
+google: {families: ["Open+Sans:400,400italic,700,700italic:greek-ext,cyrillic-ext,latin-ext,cyrillic,greek,latin,vietnamese","Montserrat:400,400italic,700,700italic:cyrillic-ext,latin-ext,cyrillic,latin,vietnamese"]},
+active: function() {
+if (document.createEvent) {
+var e = document.createEvent('HTMLEvents');
+e.initEvent('webfontactive', true, false);
+document.dispatchEvent(e);
+} else {
+document.documentElement['webfontactive']++;
+}
+}
+});
+}
+everythingConfig = {"fancyboxOptions":[],"zoomHoverIcons":{"default":"icon-plus-circled","image":"icon-search","mail":"icon-mail","title":"icon-arrow-line-right"},"captions":{"bricksAllButton":"all"}};
+</script>
+<meta name="generator" content="Powered by Slider Revolution 6.7.10 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." />
+<link rel="icon" href="https://connectbox.technology/wp/wp-content/uploads/2017/11/cropped-connectbox_logo_512-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://connectbox.technology/wp/wp-content/uploads/2017/11/cropped-connectbox_logo_512-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://connectbox.technology/wp/wp-content/uploads/2017/11/cropped-connectbox_logo_512-180x180.png" />
+<meta name="msapplication-TileImage" content="https://connectbox.technology/wp/wp-content/uploads/2017/11/cropped-connectbox_logo_512-270x270.png" />
+<script>function setREVStartSize(e){
+			//window.requestAnimationFrame(function() {
+				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;
+				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;
+				try {
+					var pw = document.getElementById(e.c).parentNode.offsetWidth,
+						newh;
+					pw = pw===0 || isNaN(pw) || (e.l=="fullwidth" || e.layout=="fullwidth") ? window.RSIW : pw;
+					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
+					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
+					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
+					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
+					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
+					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
+					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);
+					if(e.layout==="fullscreen" || e.l==="fullscreen")
+						newh = Math.max(e.mh,window.RSIH);
+					else{
+						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];
+						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
+						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
+											
+						var nl = new Array(e.rl.length),
+							ix = 0,
+							sl;
+						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
+						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
+						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
+						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;
+						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
+						sl = nl[0];
+						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}
+						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
+						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
+					}
+					var el = document.getElementById(e.c);
+					if (el!==null && el) el.style.height = newh+"px";
+					el = document.getElementById(e.c+"_wrapper");
+					if (el!==null && el) {
+						el.style.height = newh+"px";
+						el.style.display = "block";
+					}
+				} catch(e){
+					console.log("Failure at Presize of Slider:" + e)
+				}
+			//});
+		  };</script>
+	</head>
+
+			<body data-rsssl=1 class="everything-4-12-1 page-template-default page page-id-155 _masterslider _msp_version_3.7.7 layout-open scheme-bright" style="background:  no-repeat #ffffff center top/cover fixed;">
+	
+		
+		<div id="wrapper">
+
+			<div id="top-bar" class="outer-container edge-bar">
+
+									
+						<div class="container desktop-only">
+
+							<section class="section">
+								<div class="alignleft fixed"><span>A Portable Media Distribution Device</span></div><div class="alignright fixed"><div class="search-box"><form method="get" action="https://connectbox.technology/wp/" class="search" role="search"><input type="search" name="s" value="" /><button type="submit"><i class="icon-search"></i></button></form></div><nav class="top-nav-menu"><ul id="menu-menuone" class=""><li id="menu-item-141" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-141"><a href="https://connectbox.technology/wp">Home</a></li>
+<li id="menu-item-142" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-142"><a href="https://connectbox.technology/wp/what-is-a-connectbox/">What is a ConnectBox?</a></li>
+<li id="menu-item-483" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-483"><a href="https://connectbox.technology/wp/obtaining-a-connectbox/">Obtaining a Connectbox</a></li>
+<li id="menu-item-148" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-148"><a href="https://connectbox.technology/wp/getting-started-guide-with-your-connectbox/">Getting Started</a></li>
+<li id="menu-item-313" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-313"><a href="https://connectbox.technology/wp/building-a-connectbox/">Building a ConnectBox</a></li>
+<li id="menu-item-146" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-146"><a href="https://connectbox.technology/wp/support/">Support</a></li>
+<li id="menu-item-144" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-144"><a rel="privacy-policy" href="https://connectbox.technology/wp/about-us/">About/Contact</a></li>
+<li id="menu-item-157" class="menu-item menu-item-type-post_type menu-item-object-page current current-menu-item page_item page-item-155 current current_page_item menu-item-157"><a href="https://connectbox.technology/wp/making-a-low-cost-microsd-card-duplicator/" aria-current="page">DYI microSD Duplicator</a></li>
+</ul></nav></div>
+							</section>
+
+						</div><!-- // .container -->
+
+														
+						<div class="container mobile-only">
+
+							<section class="section">
+								<div class="alignleft fixed"><span>A Portable Media Distribution Device</span></div><div class="alignright fixed"><div class="search-box"><form method="get" action="https://connectbox.technology/wp/" class="search" role="search"><input type="search" name="s" value="" /><button type="submit"><i class="icon-search"></i></button></form></div><nav class="top-nav-menu"><ul id="menu-menuone-1" class=""><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-141"><a href="https://connectbox.technology/wp">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-142"><a href="https://connectbox.technology/wp/what-is-a-connectbox/">What is a ConnectBox?</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-483"><a href="https://connectbox.technology/wp/obtaining-a-connectbox/">Obtaining a Connectbox</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-148"><a href="https://connectbox.technology/wp/getting-started-guide-with-your-connectbox/">Getting Started</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-313"><a href="https://connectbox.technology/wp/building-a-connectbox/">Building a ConnectBox</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-146"><a href="https://connectbox.technology/wp/support/">Support</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-144"><a rel="privacy-policy" href="https://connectbox.technology/wp/about-us/">About/Contact</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page current current-menu-item page_item page-item-155 current current_page_item menu-item-157"><a href="https://connectbox.technology/wp/making-a-low-cost-microsd-card-duplicator/" aria-current="page">DYI microSD Duplicator</a></li>
+</ul></nav></div>
+							</section>
+
+						</div><!-- // .container -->
+
+									
+			</div><!-- // .outer-container -->
+
+			<header id="header" class="outer-container detached-background detached-border">
+
+				<div class="container">
+
+					<div class="section">
+
+						<span class="helper">
+													</span>
+
+						
+							<div id="logo">
+																<a href="https://connectbox.technology/wp/" title="ConnectBox" rel="home"><img width="44" height="44" src="https://connectbox.technology/wp/wp-content/uploads/2016/03/icon44.png" class="attachment-full size-full" alt="ConnectBox" decoding="async" /></a>
+							</div><!-- // #logo -->
+
+							
+						
+						<span class="helper">
+													</span>
+
+					</div>
+
+					<div id="mobile-section">
+
+						
+					</div>
+
+				</div><!-- // .container -->
+
+			</header><!-- // #header -->
+
+			
+			
+<div class="outer-container">
+	<nav class="nav-menu secondary upper">
+		<div class="container">
+			<div class="section">
+				<ul id="menu-menuone-2" class=""><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-141"><a href="https://connectbox.technology/wp">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-142"><a href="https://connectbox.technology/wp/what-is-a-connectbox/">What is a ConnectBox?</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-483"><a href="https://connectbox.technology/wp/obtaining-a-connectbox/">Obtaining a Connectbox</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-148"><a href="https://connectbox.technology/wp/getting-started-guide-with-your-connectbox/">Getting Started</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-313"><a href="https://connectbox.technology/wp/building-a-connectbox/">Building a ConnectBox</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-146"><a href="https://connectbox.technology/wp/support/">Support</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-144"><a rel="privacy-policy" href="https://connectbox.technology/wp/about-us/">About/Contact</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page current current-menu-item page_item page-item-155 current current_page_item menu-item-157"><a href="https://connectbox.technology/wp/making-a-low-cost-microsd-card-duplicator/" aria-current="page">DYI microSD Duplicator</a></li>
+</ul>			</div>
+		</div>
+	</nav>
+</div><!-- // .outer-container -->
+			
+
+<div id="headline" class="outer-container">
+
+	<div class="container">
+
+		<section class="section">
+						<h1>Making a Low-Cost microSD card Duplicator</h1>
+		</section>
+
+	</div>
+
+</div><!-- // .outer-container -->
+			<div id="content" class="outer-container detached-background">
+
+				<div class="container">
+
+					<div class="main alpha" style="padding: 0 308px 0 0px; margin: 0 -308px 0 -0px;">
+
+	<section class="section">
+		<article id="post-155" class="post hentry post-155 page type-page status-publish">
+			
+						<h2><span style="color:Sienna">One of the most time consuming and costly aspects of distributing ConnectBoxes is the time and effort to duplicate all the microSD card.  Normally, you would use something like Etcher to create them one by one. An alternative is to buy a 7:1 duplicator off of a place like Amazon but that isn&#8217;t cheap.  Normally something like that goes for around $540 and gets more expensive the more ports you add.  This project can reduce your costs and headache by showing you how to build your own duplicator for a little over $100.  The time to create all the images simultaneously is under 4 minutes at a time</span></h2>
+<hr />
+<figure class="alignnone">
+<div class=""><img decoding="async" src="https://raw.githubusercontent.com/ConnectBox/website_posts/master/sdcard_duplicator/duplicator_setup.jpg" alt="alt text" title="Duplicator Setup" /></div>
+</figure>
+<h1>Stuff you need</h1>
+<ol>
+<li>You will need a Raspberry Pi Kit. I recommend this one from Amazon which comes with the Pi 3, a case, the boot disk, power supply, and a HDMI cable. <a href="https://www.amazon.com/gp/product/B07BDPY7YR/ref=od_aui_detailpages00?ie=UTF8&amp;psc=1" title="Amazon">Amazon RPi Kit</a> $69.99</li>
+<li>At least one powered USB 2.0 Hub.  The model that I used is the Insten 7-Port model. <a href="https://www.amazon.com/gp/product/B01N2YYTFO/ref=od_aui_detailpages00?ie=UTF8&amp;psc=1" title="Amazon">Amazon Insten USB Hub</a> $10.49 There are plenty of other powered USB hubs out there but I like that this one has the ability to turn on/off each hub separately.  Just be sure to get a powered unit and don&#8217;t bother with getting a USB 3.0 hub.  The USB ports on the back of the RPi are only 2.0 so you&#8217;ll waste the money on the upgrade.  Although I only have one of these hubs, in theory, the RPi should be able to support writing up to ~24 microSD cards simultaneously.  You could easily expand your writing ability out by just buying additional hubs and readers.</li>
+<li>microSD to USB card readers (7 &#8211; one for each port). I like the Sandisk model since it is not at all flimsy and I&#8217;ve never had issues with them. You can save a buck or two if you get a different model but I like that these are solid. [Amazon microSD Readers]https://www.amazon.com/gp/product/B001QLFNCC/ref=oh_aui_detailpage_o01_s00?ie=UTF8&amp;psc=1 &#8220;Amazon&#8221;) $4.99</li>
+<li>A spare monitor, mouse and keyboard.</li>
+<li>A LAN cable or use the RPi&#8217;s built-in WiFi to be able to connected to the internet.</li>
+<li>microSD cards to write to that are obviously larger than the image that you plan on writing out to.</li>
+</ol>
+<h1>Building the Unit</h1>
+<p>Assuming that you got the above RPi kit, assemble the RPi by putting it into the case, connecting up the HDMI cable to your monitor, connecting up your mouse and keyboard to the USB ports, and inserting the microSD card that comes with the unit into the RPi.  Now also would be a good time to hook up the USB Hub and insert all the readers with the microSD cards that you want to burn the image onto.  Be sure to turn on each of the ports that you want to burn to.  Plug in the unit which will start the boot up process.</p>
+<h3>Installer Script</h3>
+<p>Assuming that you are connected to the internet, you can use the installer script will take you through a brand new Raspian system through getting the OS completely prepared for running OSID.</p>
+<p>On your RPi, open up a terminal window and type in the following:</p>
+<p><strong><em>wget https://raw.githubusercontent.com/GeoDirk/osid-python3/master/install_osid.sh</em></strong></p>
+<p>Once that file has downloaded successfully type in:</p>
+<p><strong><em>chmod 755 install_osid.sh</em></strong></p>
+<p>which will change the file permissions to executable.  Follow that with:</p>
+<p><strong><em>sudo ./install_osid.sh</em></strong></p>
+<p>To start the process running.  Once the script has completed, you&#8217;ll need to reboot your machine to finalize the settings.  After reboot, there will be a new icon on your Desktop called &#8220;rPi SD Card Duplicator&#8221;.  Double clicking this will launch the GUI.</p>
+<p>Samba has been installed on your machine and has opened up a file share that you can see from your network.  (Note: that you may have to fix the Workgroup setting in the file: /etc/samba/smb.conf).  Either copy the image that you want to burn using the file share or copy it in locally by putting it in the directory <strong><em>/etc/osid/imageroot</em></strong></p>
+<p>As part of the installation, a new icon that will launch a File Manager with &#8220;root&#8221; privilges is available.  You can download through the browswer your image files from here: <a href="https://github.com/ConnectBox/connectbox-pi/releases/" title="Link">https://github.com/ConnectBox/connectbox-pi/releases/</a>  Once they are downloaded, use the new File Manager icon to navigate to your Downloads directory, cut and paste it in the the <strong><em>/etc/osid/imgroot</em></strong> folder.  Once there, right click on the .xz file and select the &#8220;Xarchiver&#8221; option to open up the archive.  This takes a REALLY unnecessarily long time but just wait it out.  Once the archiver shows you the xxxx.img file, drag and drop it from the Xarchiver window into the /etc/osid/imgroot folder of your File Manager. Once it copies over, feel free to delete the .xz one as it no longer is needed.</p>
+<figure class="alignnone">
+<div class=""><img decoding="async" src="https://raw.githubusercontent.com/ConnectBox/website_posts/master/sdcard_duplicator/screenshot.png" alt="alt text" title="Screenshot" /></div>
+</figure>
+					</article>
+	</section>
+
+				
+
+
+					</div><aside id="aside-right-2" class="aside beta" style="width: 308px;"><section id="layerslider_widget-2" class="section widget layerslider_widget"><script type="text/javascript">jQuery(function() { _initLayerSlider( '#layerslider_2_yaq88wqbcvhu', {createdWith: '7.7.5', sliderVersion: '7.7.5', useSrcset: true, skinsPath: 'https://connectbox.technology/wp/wp-content/plugins/LayerSlider/assets/static/layerslider/skins/', performanceMode: true}); });</script><div id="layerslider_2_yaq88wqbcvhu"  class="ls-wp-container fitvidsignore ls-selectable" style="width:1280px;height:720px;margin:0 auto;"><div class="ls-slide" ></div></div></section></aside>
+				</div><!-- // .container -->
+
+			</div><!-- // .outer-container -->
+
+			
+			<div id="bottom" class="outer-container">
+
+				
+<div id="footer">
+
+	<div class="container">
+
+		<section class="section">
+
+			<div class="columns alt-mobile">
+				<ul>
+											<li class="col-1-4">
+													</li>
+											<li class="col-1-4">
+													</li>
+											<li class="col-1-4">
+													</li>
+											<li class="col-1-4">
+													</li>
+									</ul>
+			</div><!-- // .columns -->
+
+		</section>
+
+	</div><!-- // .container -->
+
+</div><!-- // #footer -->
+				
+					<footer id="end-note" class="edge-bar">
+
+						<div class="container">
+
+							<section class="section">
+								<div class="alignleft fixed"><p>&copy; Copyright 2017<br />
+ by Global Tech Team</p></div>
+								<div class="alignright fixed"><p></p></div>
+							</section>
+
+						</div><!-- // .container -->
+
+					</footer><!-- // #end-note -->
+
+				
+			</div><!-- // .outer-container -->
+
+		</div><!-- // #wrapper -->
+
+		
+		<script>
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = true;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+		<link rel='stylesheet' id='rs-plugin-settings-css' href='//connectbox.technology/wp/wp-content/plugins/revslider/sr6/assets/css/rs6.css?ver=6.7.10' type='text/css' media='all' />
+<style id='rs-plugin-settings-inline-css' type='text/css'>
+#rs-demo-id {}
+</style>
+<script type="text/javascript" src="//connectbox.technology/wp/wp-content/plugins/revslider/sr6/assets/js/rbtools.min.js?ver=6.7.5" defer async id="tp-tools-js"></script>
+<script type="text/javascript" src="//connectbox.technology/wp/wp-content/plugins/revslider/sr6/assets/js/rs6.min.js?ver=6.7.10" defer async id="revmin-js"></script>
+<script type="text/javascript" src="https://connectbox.technology/wp/wp-content/themes/everything/data/js/everything.min.js?ver=4.12.1" id="everything-script-js"></script>
+<script type="text/javascript" id="everything-social-media-api-js-extra">
+/* <![CDATA[ */
+var drone_social_media_api = {"locale":"en_US"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://connectbox.technology/wp/wp-content/themes/everything/vendor/webberwebber/drone/js/social-media-api.js?ver=5.9.2" id="everything-social-media-api-js"></script>
+
+	</body>
+
+</html>
