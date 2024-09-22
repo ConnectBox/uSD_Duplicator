@@ -1,0 +1,53 @@
+Notes on building RPi uSD Duplicator
+
+This document details the steps required to build a uSD duplicator using an Raspberry Pi 3. This is an updated
+ version of the instructions found at connectbox.technology, and is adapted for use with recent versions of raspi-os.
+
+- Open Rpi website (https://www.raspberrypi.com/software/operating-systems/) and download RPi OS with desktop (bullseye: July 4, 2024)
+- Using BalenaEtcher, burn image to 8 GB uSD (or larger) uSD  (larger sizes are preferred as the image itself will take almost 6 GB)
+- When burn to the uSD is complete, insert the uSD into an RPi 3 unit and boot the RPI 3
+- Connect mouse and keyboard 
+- Go through standard RPi setup
+   - Set country, language, timezone
+   - Create username and password (pi,pi)		// important... user "pi" is required!
+   - Click "OK" on warning screen for pi/pi username
+   - Setup screen
+   - Choose wifi
+   - Enter wifi password
+   - Choose browser (Chromium or Firefox)
+   - Select RPi Connect preference (choice not critical)
+   - Select update software preference (skip)
+   - Restart
+
+- After reboot open a terminal window (top row of screen, rightmost icon... looks like small black screen with ">") 
+- At the top of terminal window, select Edit -> Preferences and choose "xterm" from the pallet list
+- In terminal window, type the following commands, waiting for completion after each command...
+   - wget https://raw.githubusercontent.com/GeoDirk/osid-python3/master/install_osid.sh  
+   - chmod 755 install_osid.sh
+   - sudo ./install_osid.sh 
+      - (Note that this takes a while to run... be patient... typically 30 minutes)
+    - When install is complete, you will see a message, "===Restart Your System===" above the command prompt
+   - sudo touch /var/osid/access.log
+   - sudo chmod 666 /var/osid/access.log 
+   - sudo vi /etc/hosts				// or editor of your choice
+   		- add "osid" to end of ::1 list  
+
+- Now we will need to create a virtual environment, install cherrypy in that environment and edit the run_app.sh to use it.
+ 	- cd
+ 	- python3 -m venv duplicator	// create the venv
+ 	- source duplicator/bin/activate
+ 	- pip3 install cherrypy
+ 	- deactivate
+	- sudo vi /etc/osid/system/run_app.sh  			// or editor of your choice
+		- delete lines 2,3
+		- insert in their place:
+			source "/home/pi/duplicator/bin/activate"
+			cd /etc/osid/system
+			sudo /home/pi/duplicator/bin/python3 server.py
+		- at the end append the following:
+			deactivate
+
+- sudo reboot now
+
+The rPi Duplicator icon now properly starts the rPi Duplicator program.
+
